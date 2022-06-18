@@ -5,7 +5,7 @@ const auth = (req,res,next) =>{
 
     if (!tokenHeader) return res.status(401).send({ error: 'Autenticação negada!'});
 
-    jwt.verify(tokenHeader,config.tokenPass, (err,decoded)=>{
+    jwt.verify(tokenHeader,process.env.tokenPass, (err,decoded)=>{
         if (err) return res.status(401).send({error: 'Token inválido'});
         return next();
     })
