@@ -20,6 +20,9 @@ router.get('/random',auth,(req, res) =>{
 })
 
 router.post('/answer',auth,(req, res) =>{
+    helper.checkAnswer(req.body.answerRequest).then(function(r) {
+        res.status(200).send(r);
+    });
     
 })
 
