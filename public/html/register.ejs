@@ -12,11 +12,12 @@
           <div class="form-content">
             <div class="form-items">
               <h3>Cadastro</h3>
-              <p>Insira as credenciais para se cadastrar</p>
-              <form class="requires-validation" novalidate>
+              <p>Insert your credentials to register</p>
+              <form class="requires-validation" id="register" action="http://localhost:3000/users/create" method="POST">
 
                 <div class="col-md-12">
                   <input
+                    id="email"
                     class="form-control"
                     type="email"
                     name="email"
@@ -30,10 +31,11 @@
 
                 <div class="col-md-12">
                   <input
+                    id="password"
                     class="form-control"
                     type="password"
                     name="password"
-                    placeholder="Senha"
+                    placeholder="Password"
                     required
                   />
                   <div class="invalid-feedback">
@@ -55,22 +57,22 @@
 </html>
 
 <script>
-  (function () {
-    "use strict";
-    const forms = document.querySelectorAll(".requires-validation");
-    Array.from(forms).forEach(function (form) {
-      form.addEventListener(
-        "submit",
-        function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
+  $(document).ready(function () {
+    $("register").submit((e) => {
+      var formData = {
+        email: $("#email").val(),
+        password: $("#password").val(),
+      };
 
-          form.classList.add("was-validated");
-        },
-        false
-      );
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:3000/users/create",
+        data: formData,
+        dataType: "json",
+        encode: true,
+      })
+
+      event.preventDefault();
     });
-  })();
+  });
 </script>
