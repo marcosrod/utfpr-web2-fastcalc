@@ -34,8 +34,13 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4 id="q1"></h4>
-          <form id="form-q1" action="http://localhost:3000/challenges/answer" method="POST">
+          <div class="question">
+            <h4 id="q1-1"></h4>
+            <h4 id="q1-op"></h4>
+            <h4 id="q1-2"></h4>
+          </div>
+          
+          <form id="form-q1">
             <div class="col-md-12">
               <input
                 id="result-q1"
@@ -48,7 +53,12 @@
               <div class="invalid-feedback">A resposta não pode ser vazia.</div>
             </div>
             <div class="form-button mt-3">
-              <button id="submit-1" type="submit" class="btn btn-dark">
+              <button
+                id="submit-1"
+                type="button"
+                onclick="saveAnswer('q1');"
+                class="btn btn-dark"
+              >
                 Send
               </button>
             </div>
@@ -58,8 +68,12 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4 id="q2"></h4>
-          <form id="form-q2" action="http://localhost:3000/challenges/answer" method="POST">
+          <div class="question">
+            <h4 id="q2-1"></h4>
+            <h4 id="q2-op"></h4>
+            <h4 id="q2-2"></h4>
+          </div>
+          <form id="form-q2">
             <div class="col-md-12">
               <input
                 id="result-q2"
@@ -72,7 +86,12 @@
               <div class="invalid-feedback">A resposta não pode ser vazia.</div>
             </div>
             <div class="form-button mt-3">
-              <button id="submit-2" type="submit" class="btn btn-dark">
+              <button
+                id="submit-2"
+                type="button"
+                onclick="saveAnswer('q2');"
+                class="btn btn-dark"
+              >
                 Send
               </button>
             </div>
@@ -82,8 +101,12 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4 id="q3"></h4>
-          <form id="form-q3" action="http://localhost:3000/challenges/answer" method="POST">
+          <div class="question">
+            <h4 id="q3-1"></h4>
+            <h4 id="q3-op"></h4>
+            <h4 id="q3-2"></h4>
+          </div>
+          <form id="form-q3">
             <div class="col-md-12">
               <input
                 id="result-q3"
@@ -96,7 +119,12 @@
               <div class="invalid-feedback">A resposta não pode ser vazia.</div>
             </div>
             <div class="form-button mt-3">
-              <button id="submit-3" type="submit" class="btn btn-dark">
+              <button
+                id="submit-3"
+                type="button"
+                onclick="saveAnswer('q3');"
+                class="btn btn-dark"
+              >
                 Send
               </button>
             </div>
@@ -106,8 +134,12 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4 id="q4"></h4>
-          <form id="form-q4" action="http://localhost:3000/challenges/answer" method="POST">
+          <div class="question">
+            <h4 id="q4-1"></h4>
+            <h4 id="q4-op"></h4>
+            <h4 id="q4-2"></h4>
+          </div>
+          <form id="form-q4">
             <div class="col-md-12">
               <input
                 id="result-q4"
@@ -120,7 +152,12 @@
               <div class="invalid-feedback">A resposta não pode ser vazia.</div>
             </div>
             <div class="form-button mt-3">
-              <button id="submit-4" type="submit" class="btn btn-dark">
+              <button
+                id="submit-4"
+                type="button"
+                onclick="saveAnswer('q4');"
+                class="btn btn-dark"
+              >
                 Send
               </button>
             </div>
@@ -130,8 +167,12 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4 id="q5"></h4>
-          <form id="form-q5" action="http://localhost:3000/challenges/answer" method="POST">
+          <div class="question">
+            <h4 id="q5-1"></h4>
+            <h4 id="q5-op"></h4>
+            <h4 id="q5-2"></h4>
+          </div>
+          <form id="form-q5">
             <div class="col-md-12">
               <input
                 id="result-q5"
@@ -144,7 +185,12 @@
               <div class="invalid-feedback">A resposta não pode ser vazia.</div>
             </div>
             <div class="form-button mt-3">
-              <button id="submit-5" type="submit" class="btn btn-dark">
+              <button
+                id="submit-5"
+                type="button"
+                onclick="saveAnswer('q5');"
+                class="btn btn-dark"
+              >
                 Send
               </button>
             </div>
@@ -154,8 +200,12 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4 id="q6"></h4>
-          <form id="form-q6" action="http://localhost:3000/challenges/answer" method="POST">
+          <div class="question">
+            <h4 id="q6-1"></h4>
+            <h4 id="q6-op"></h4>
+            <h4 id="q6-2"></h4>
+          </div>
+          <form id="form-q6">
             <div class="col-md-12">
               <input
                 id="result-q6"
@@ -168,7 +218,12 @@
               <div class="invalid-feedback">A resposta não pode ser vazia.</div>
             </div>
             <div class="form-button mt-3">
-              <button id="submit-6" type="submit" class="btn btn-dark">
+              <button
+                id="submit-6"
+                type="button"
+                onclick="saveAnswer('q6');"
+                class="btn btn-dark"
+              >
                 Send
               </button>
             </div>
@@ -178,8 +233,12 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4 id="q7"></h4>
-          <form id="form-q7" action="http://localhost:3000/challenges/answer" method="POST">
+          <div class="question">
+            <h4 id="q7-1"></h4>
+            <h4 id="q7-op"></h4>
+            <h4 id="q7-2"></h4>
+          </div>
+          <form id="form-q7">
             <div class="col-md-12">
               <input
                 id="result-q7"
@@ -192,7 +251,12 @@
               <div class="invalid-feedback">A resposta não pode ser vazia.</div>
             </div>
             <div class="form-button mt-3">
-              <button id="submit-7" type="submit" class="btn btn-dark">
+              <button
+                id="submit-7"
+                type="button"
+                onclick="saveAnswer('q7');"
+                class="btn btn-dark"
+              >
                 Send
               </button>
             </div>
@@ -202,8 +266,12 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4 id="q8"></h4>
-          <form id="form-q8" action="http://localhost:3000/challenges/answer" method="POST">
+          <div class="question">
+            <h4 id="q8-1"></h4>
+            <h4 id="q8-op"></h4>
+            <h4 id="q8-2"></h4>
+          </div>
+          <form id="form-q8">
             <div class="col-md-12">
               <input
                 id="result-q8"
@@ -216,7 +284,12 @@
               <div class="invalid-feedback">A resposta não pode ser vazia.</div>
             </div>
             <div class="form-button mt-3">
-              <button id="submit-8" type="submit" class="btn btn-dark">
+              <button
+                id="submit-8"
+                type="button"
+                onclick="saveAnswer('q8');"
+                class="btn btn-dark"
+              >
                 Send
               </button>
             </div>
@@ -226,8 +299,12 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4 id="q9"></h4>
-          <form id="form-q9" action="http://localhost:3000/challenges/answer" method="POST">
+          <div class="question">
+            <h4 id="q9-1"></h4>
+            <h4 id="q9-op"></h4>
+            <h4 id="q9-2"></h4>
+          </div>
+          <form id="form-q9">
             <div class="col-md-12">
               <input
                 id="result-q9"
@@ -240,7 +317,12 @@
               <div class="invalid-feedback">A resposta não pode ser vazia.</div>
             </div>
             <div class="form-button mt-3">
-              <button id="submit-9" type="submit" class="btn btn-dark">
+              <button
+                id="submit-9"
+                type="button"
+                onclick="saveAnswer('q9');"
+                class="btn btn-dark"
+              >
                 Send
               </button>
             </div>
@@ -250,8 +332,12 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4 id="q10"></h4>
-          <form id="form-q10" action="http://localhost:3000/challenges/answer" method="POST">
+          <div class="question">
+            <h4 id="q10-1"></h4>
+            <h4 id="q10-op"></h4>
+            <h4 id="q10-2"></h4>
+          </div>
+          <form id="form-q10">
             <div class="col-md-12">
               <input
                 id="result-q10"
@@ -264,7 +350,12 @@
               <div class="invalid-feedback">A resposta não pode ser vazia.</div>
             </div>
             <div class="form-button mt-3">
-              <button id="submit-10" type="submit" class="btn btn-dark">
+              <button
+                id="submit-10"
+                type="button"
+                onclick="saveAnswer('q10');"
+                class="btn btn-dark"
+              >
                 Send
               </button>
             </div>
@@ -276,8 +367,12 @@
 </html>
 
 <script>
+  var difficulty;
+  var dateTimeStart;
   $(document).ready(function () {
-    let difficulty = location.href[location.href.length - 1];
+    difficulty = location.href[location.href.length - 1];
+    dateTimeStart = new Date();
+    dateTimeStart = dateTimeStart.toISOString();
     let remaining;
     var answerQ;
     switch (difficulty) {
@@ -305,9 +400,10 @@
       type: "GET",
       url: `http://localhost:3000/challenges/try?difficulty=${difficulty}`,
     }).then((res) => {
-      
       res.questions.forEach((data) => {
-        $(`#q${contador.toString()}`).text(`${data.n1} * ${data.n2}`);
+        $(`#q${contador.toString()}-1`).text(data.n1);
+        $(`#q${contador.toString()}-op`).text('*');
+        $(`#q${contador.toString()}-2`).text(data.n2);
         contador++;
       });
     });
@@ -315,10 +411,49 @@
     $("#remaining").text(remaining);
   });
 
+  function saveAnswer(q) {
+    $.ajax({
+      type: "GET",
+      url: `http://localhost:3000/users/get-user-by-token`,
+    }).then((res) => {
+      let dateTimeAnswer = new Date();
+      dateTimeAnswer = dateTimeAnswer.toISOString();
+      if ($(`#result-${q}`).val() !== null) {
+        var answerRequest = {
+          answerRequest: {
+            userEmail: res,
+            id: q,
+            n1: $(`#${q}-1`).text(),
+            n2: $(`#${q}-2`).text(),
+            result: $(`#result-${q}`).val(),
+            difficulty: difficulty,
+            dateTimeStart: dateTimeStart,
+            dateTimeAnswer: dateTimeAnswer,
+          },
+        };
 
-  function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:3000/challenges/answer",
+          data: answerRequest,
+          dataType: "json",
+          encode: true,
+        }).then((res) => {
+          if (res.completed) {
+            window.location.href = "http://localhost:3000/mypage";
+          }
+        });
+      }
+    });
+  }
+
+  function getNumber(subString) {
+    if (Number(subString[0]) >= 0 && Number(subString[1]) >= 0) {
+      return subString;
+    } else if (Number(subString[0]) >= 0) {
+      return subString[0];
+    } else {
+      return subString[1];
+    }
+  }
 </script>

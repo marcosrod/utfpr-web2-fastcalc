@@ -26,21 +26,47 @@ function getRandomQuestions() {
     return random;
 }
 
+function getDifficulty(difficulty) {
+    switch(difficulty) {
+        case 'easy':
+            return 1;
+        case 'normal':
+            return 2;
+        case 'advanced':
+            return 3;
+        case 'extreme':
+            return 4;
+        default:
+            break;
+    }
+}
+
+async function getBestTime(email) {
+    let bestTime = {};
+    bestTime.easy = await Answers.exists({user_email: email, open: false, difficulty: 1, bonus_time: {$ne: null}}) ? ((await Answers.findOne({user_email: email, open: false, difficulty: 1, bonus_time: {$ne: null}})).bonus_time).toString() + 's' : '0s'
+    bestTime.normal = await Answers.exists({user_email: email, open: false, difficulty: 2, bonus_time: {$ne: null}}) ? ((await Answers.findOne({user_email: email, open: false, difficulty: 2, bonus_time: {$ne: null}})).bonus_time).toString() + 's' : '0s'
+    bestTime.advanced = await Answers.exists({user_email: email, open: false, difficulty: 3, bonus_time: {$ne: null}}) ? ((await Answers.findOne({user_email: email, open: false, difficulty: 3, bonus_time: {$ne: null}})).bonus_time).toString() + 's' : '0s'
+    bestTime.extreme = await Answers.exists({user_email: email, open: false, difficulty: 4, bonus_time: {$ne: null}}) ? ((await Answers.findOne({user_email: email, open: false, difficulty: 4, bonus_time: {$ne: null}})).bonus_time).toString() + 's' : '0s'
+
+    return bestTime;
+}
+
 async function checkAnswer(answerRequest) {
     const {id, n1, n2, result, dateTimeAnswer, dateTimeStart, userEmail, difficulty} = answerRequest;
     var remainingTime;
     var subScore;
-    if ((n1 * n2 !== result)) {
+    let difficultyNumber = getDifficulty(difficulty);
+    if (((Number(n1) * Number(n2)) !== Number(result))) {
         return {result: false}
     } else if(id == 'q1'){
         if (await checkForOpenAnswers(userEmail)) {
             return "Já existe uma atividade aberta aguardando resposta, termine primeiro para depois abrir outra."
         }
         let answer = await Answers.create({user_email: userEmail, open: true, 
-            difficulty: difficulty, time_start: dateTimeStart, bonus_time: null, q1: dateTimeAnswer, q2: null, q3: null, 
+            difficulty: difficultyNumber, time_start: dateTimeStart, bonus_time: null, q1: dateTimeAnswer, q2: null, q3: null, 
             q4: null, q5: null, q6: null, q7: null, q8: null, q9:null, q10:null})
-            remainingTime = await calculateRemainingTime(answer.time_start, dateTimeStart, dateTimeAnswer, difficulty, userEmail);
-        (answer)
+            remainingTime = await calculateRemainingTime(answer.time_start, dateTimeStart, dateTimeAnswer, difficultyNumber, userEmail);
+            
         return {remainingTime: remainingTime, result: true}
     } else {
         switch(id) {
@@ -83,7 +109,7 @@ async function checkAnswer(answerRequest) {
                 break;
         }
         let answer = await Answers.findOne({user_email: userEmail, open: true});
-        remainingTime = await calculateRemainingTime(answer.time_start, dateTimeStart, dateTimeAnswer, difficulty, userEmail);
+        remainingTime = await calculateRemainingTime(answer.time_start, dateTimeStart, dateTimeAnswer, difficultyNumber, userEmail);
         let check = await checkCompleted(userEmail, answer.time_start, remainingTime, id, subScore);
         (check);
         return check && check.completed ? check : {remainingTime: remainingTime, result: true}
@@ -166,13 +192,14 @@ async function calculateRemainingTime(dateTimeStart, dateTimePastAnswer, dateTim
     let dateAnswer = new Date(dateTimeAnswer);
     let datePast = new Date(dateTimePastAnswer);
     let timeAnswer = (dateAnswer.getTime() - datePast.getTime()) / 1000;
-    (timeAnswer);
+    console.log(difficulty, timeAnswer, dateTimeStart, datePast, dateAnswer, userEmail);
     remainingTime = await getRemainingTime(difficulty, timeAnswer, dateTimeStart, datePast, dateAnswer, userEmail);
     remainingTime = remainingTime.toFixed(0);
     (remainingTime);
     if (remainingTime < 0) {
         remainingTime = 0;
     }
+    console.log(remainingTime);
     await Answers.updateOne({user_email: userEmail, open: true}, {bonus_time: remainingTime})
 
     return remainingTime;
@@ -233,4 +260,4 @@ async function checkForOpenAnswers(userEmail) {
 
 
 
-module.exports = {getQuestions, checkAnswer};
+module.exports = {getQuestions, checkAnswer, getBestTime};

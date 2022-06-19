@@ -18,6 +18,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/index.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
     <div class="page-div">
@@ -30,11 +31,16 @@
           <div class="challenges-card-info">
             <h4>10 Questions</h4>
             <h4>Easy</h4>
-            <h4>Best Time: 40 Seconds</h4>
+            <h4 id="best-time-1"></h4>
           </div>
           <form>
             <div class="form-button mt-3">
-              <button id="submit-1" type="button" onclick="location.href = 'http://localhost:3000/mydetails';" class="btn btn-dark">
+              <button
+                id="submit-1"
+                type="button"
+                onclick="location.href = 'http://localhost:3000/mydetails';"
+                class="btn btn-dark"
+              >
                 View History
               </button>
             </div>
@@ -47,11 +53,16 @@
           <div class="challenges-card-info">
             <h4>10 Questions</h4>
             <h4>Normal</h4>
-            <h4>Best Time: 30 Seconds</h4>
+            <h4 id="best-time-2"></h4>
           </div>
           <form>
             <div class="form-button mt-3">
-              <button id="submit-2" type="button" onclick="location.href = 'http://localhost:3000/mydetails';" class="btn btn-dark">
+              <button
+                id="submit-2"
+                type="button"
+                onclick="location.href = 'http://localhost:3000/mydetails';"
+                class="btn btn-dark"
+              >
                 View History
               </button>
             </div>
@@ -64,11 +75,16 @@
           <div class="challenges-card-info">
             <h4>10 Questions</h4>
             <h4>Advanced</h4>
-            <h4>Best Time: 20 Seconds</h4>
+            <h4 id="best-time-3"></h4>
           </div>
           <form>
             <div class="form-button mt-3">
-              <button id="submit-3" type="button" onclick="location.href = 'http://localhost:3000/mydetails';" class="btn btn-dark">
+              <button
+                id="submit-3"
+                type="button"
+                onclick="location.href = 'http://localhost:3000/mydetails';"
+                class="btn btn-dark"
+              >
                 View History
               </button>
             </div>
@@ -81,12 +97,17 @@
           <div class="challenges-card-info">
             <h4>10 Questions</h4>
             <h4>EXTREME</h4>
-            <h4>Best Time: 5 Seconds</h4>
+            <h4 id="best-time-4"></h4>
           </div>
 
           <form>
             <div class="form-button mt-3">
-              <button id="submit-4" type="button" onclick="location.href = 'http://localhost:3000/mydetails';" class="btn btn-dark">
+              <button
+                id="submit-4"
+                type="button"
+                onclick="location.href = 'http://localhost:3000/mydetails';"
+                class="btn btn-dark"
+              >
                 View History
               </button>
             </div>
@@ -96,3 +117,24 @@
     </div>
   </body>
 </html>
+
+<script>
+  $(document).ready(function () {
+    $.ajax({
+      type: "GET",
+      url: `http://localhost:3000/users/get-user-by-token`,
+    }).then((res) => {
+      $.ajax({
+        type: "GET",
+        url: `http://localhost:3000/challenges/best-time`,
+        data: {email: res},
+        dataType: "json",
+      }).then((res) => {
+        $(`#best-time-1`).text(`Best Time: ${res.easy}`);
+        $(`#best-time-2`).text(`Best Time: ${res.normal}`);
+        $(`#best-time-3`).text(`Best Time: ${res.advanced}`);
+        $(`#best-time-4`).text(`Best Time: ${res.extreme}`);
+      });
+    });
+  });
+</script>

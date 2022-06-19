@@ -105,6 +105,18 @@ router.get('/logout', async (req,res)=>{
     
 })
 
+router.get('/get-user-by-token', async (req,res) => {
+    const {token} = req.cookies;
+    if (!token) {
+        res.redirect('/login');
+    } else {
+        decoded = jwt.verify(token, process.env.tokenPass);
+        let user = await Users.findOne({_id: decoded.id});
+
+        res.status(200).send(user.email);
+    }
+})
+
 
 
 module.exports = router;
