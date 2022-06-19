@@ -78,10 +78,22 @@ router.post('/auth', async (req,res)=>{
         if(!passOk) return res.status(401).send({error:'Erro ao autenticar usuário!'});
 
         user.password = undefined;
-        return res.send({user,token: createUserToken(user.id)});
+
+        let token = createUserToken(user.id);
+
+        res.cookie('token', token);
+        res.redirect('/index');
     } catch (err) {
         return res.status(500).send({error:'erro ao buscar usuário'});
     }
+})
+
+router.get('/logout', async (req,res)=>{
+    const {token} = req.cookies;
+    if(!token) return res.status(400).send({error:'O usuário já está deslogado'})
+
+    res.clearCookie('token');
+    res.redirect('/login');
 })
 
 

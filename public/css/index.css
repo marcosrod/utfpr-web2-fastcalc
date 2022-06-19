@@ -253,3 +253,10 @@ html, body {
     margin-top:2%;
     margin-left:1%;
 }
+
+.login-btn-div{
+    width:90%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

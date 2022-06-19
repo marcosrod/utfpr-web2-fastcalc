@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config()
+const cookieParser = require("cookie-parser");
 
 const url = process.env.bdURL;
 const options = { useUnifiedTopology: true , poolSize: 5, useNewUrlParser: true,useCreateIndex: true};
@@ -23,13 +24,17 @@ mongoose.connection.on('disconnected',() =>{
 })
 
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('./public'));
+app.use(cookieParser());
 
 const indexRoute = require('./routes/index');
 const usersRoute = require('./routes/users');
 const questionsRoute = require('./routes/questions');
 
+app.set('view engine', 'ejs');
+app.set('views', "./public/html");
 app.use('/', indexRoute);
 app.use('/users',usersRoute);
 app.use('/questions',questionsRoute);
