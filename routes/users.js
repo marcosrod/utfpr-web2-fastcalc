@@ -37,7 +37,9 @@ router.post('/create', async(req,res)=>{
 
         let token = createUserToken(user.id);
 
+        console.log(email);
         res.cookie('token', token);
+        res.cookie('email', email);
         res.redirect('/index');
     } catch (err) {
         if(err) return res.status(500).send({error:'Erro ao buscar usuario'});
@@ -83,6 +85,7 @@ router.post('/auth', async (req,res)=>{
         let token = createUserToken(user.id);
 
         res.cookie('token', token);
+        res.cookie('email', email);
         res.redirect('/index');
     } catch (err) {
         return res.status(500).send({error:'erro ao buscar usuário'});
@@ -91,10 +94,15 @@ router.post('/auth', async (req,res)=>{
 
 router.get('/logout', async (req,res)=>{
     const {token} = req.cookies;
-    if(!token) return res.status(400).send({error:'O usuário já está deslogado'})
+    if(!token) {
+        res.redirect('/login');
+    } else {
+        res.clearCookie('token');
+        res.clearCookie('email');
+        res.redirect('/login');
+    }
 
-    res.clearCookie('token');
-    res.redirect('/login');
+    
 })
 
 

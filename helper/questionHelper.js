@@ -2,13 +2,13 @@ const Answers = require('../model/answer');
 const Questions = require('../model/question');
 var questions = [];
 
-function getQuestions() {
+function getQuestions(difficulty) {
     let i = 0;
     for(i = 0; i < 10; i++) {
         questions.push(getRandomQuestions());
     }
-    
-    return questions;
+
+    return {questions: questions, difficulty: difficulty};
 }
 
 function getRandomQuestions() {

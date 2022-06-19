@@ -37,7 +37,7 @@ app.set('view engine', 'ejs');
 app.set('views', "./public/html");
 app.use('/', indexRoute);
 app.use('/users',usersRoute);
-app.use('/questions',questionsRoute);
+app.use('/challenges',questionsRoute);
 
 
 app.listen(3000);

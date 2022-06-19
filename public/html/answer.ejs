@@ -18,14 +18,15 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/index.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
     <div class="page-div">
       <div class="card answer-card-difficulty">
-        <div class="card-body">Easy</div>
+        <div class="card-body" id="difficulty"></div>
       </div>
       <div class="card answer-card-time">
-        <div class="card-body">Remaining Time: 50s</div>
+        <div class="card-body" id="remaining"></div>
       </div>
       <div class="card line">
         <div class="card-body"></div>
@@ -33,13 +34,14 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4>1 * 2</h4>
-          <form>
+          <h4 id="q1"></h4>
+          <form id="form-q1" action="http://localhost:3000/challenges/answer" method="POST">
             <div class="col-md-12">
               <input
+                id="result-q1"
                 class="form-control"
-                type="password"
-                name="password"
+                type="number"
+                name="result"
                 placeholder="Answer"
                 required
               />
@@ -56,13 +58,14 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4>1 * 2</h4>
-          <form>
+          <h4 id="q2"></h4>
+          <form id="form-q2" action="http://localhost:3000/challenges/answer" method="POST>
             <div class="col-md-12">
               <input
+                id="result-q2"
                 class="form-control"
-                type="password"
-                name="password"
+                type="number"
+                name="result"
                 placeholder="Answer"
                 required
               />
@@ -79,13 +82,14 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4>1 * 2</h4>
-          <form>
+          <h4 id="q3"></h4>
+          <form id="form-q3" action="http://localhost:3000/challenges/answer" method="POST>
             <div class="col-md-12">
               <input
+                id="result-q3"
                 class="form-control"
-                type="password"
-                name="password"
+                type="number"
+                name="result"
                 placeholder="Answer"
                 required
               />
@@ -102,13 +106,14 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4>1 * 2</h4>
-          <form>
+          <h4 id="q4"></h4>
+          <form id="form-q4" action="http://localhost:3000/challenges/answer" method="POST>
             <div class="col-md-12">
               <input
+                id="result-q4"
                 class="form-control"
-                type="password"
-                name="password"
+                type="number"
+                name="result"
                 placeholder="Answer"
                 required
               />
@@ -125,13 +130,14 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4>1 * 2</h4>
-          <form>
+          <h4 id="q5"></h4>
+          <form id="form-q5" action="http://localhost:3000/challenges/answer" method="POST>
             <div class="col-md-12">
               <input
+                id="result-q5"
                 class="form-control"
-                type="password"
-                name="password"
+                type="number"
+                name="result"
                 placeholder="Answer"
                 required
               />
@@ -148,13 +154,14 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4>1 * 2</h4>
-          <form>
+          <h4 id="q6"></h4>
+          <form id="form-q6" action="http://localhost:3000/challenges/answer" method="POST>
             <div class="col-md-12">
               <input
+                id="result-q6"
                 class="form-control"
-                type="password"
-                name="password"
+                type="number"
+                name="result"
                 placeholder="Answer"
                 required
               />
@@ -171,13 +178,14 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4>1 * 2</h4>
-          <form>
+          <h4 id="q7"></h4>
+          <form id="form-q7" action="http://localhost:3000/challenges/answer" method="POST>
             <div class="col-md-12">
               <input
+                id="result-q7"
                 class="form-control"
-                type="password"
-                name="password"
+                type="number"
+                name="result"
                 placeholder="Answer"
                 required
               />
@@ -194,13 +202,14 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4>1 * 2</h4>
-          <form>
+          <h4 id="q8"></h4>
+          <form id="form-q8" action="http://localhost:3000/challenges/answer" method="POST>
             <div class="col-md-12">
               <input
+                id="result-q8"
                 class="form-control"
-                type="password"
-                name="password"
+                type="number"
+                name="result"
                 placeholder="Answer"
                 required
               />
@@ -217,13 +226,14 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4>1 * 2</h4>
-          <form>
+          <h4 id="q9"></h4>
+          <form id="form-q9" action="http://localhost:3000/challenges/answer" method="POST>
             <div class="col-md-12">
               <input
+                id="result-q9"
                 class="form-control"
-                type="password"
-                name="password"
+                type="number"
+                name="result"
                 placeholder="Answer"
                 required
               />
@@ -240,13 +250,14 @@
 
       <div class="card answer-card">
         <div class="card-body">
-          <h4>1 * 2</h4>
-          <form>
+          <h4 id="q10"></h4>
+          <form id="form-q10" action="http://localhost:3000/challenges/answer" method="POST>
             <div class="col-md-12">
               <input
+                id="result-q10"
                 class="form-control"
-                type="password"
-                name="password"
+                type="number"
+                name="result"
                 placeholder="Answer"
                 required
               />
@@ -263,3 +274,80 @@
     </div>
   </body>
 </html>
+
+<script>
+  $(document).ready(function () {
+    let difficulty = location.href[location.href.length - 1];
+    let remaining;
+    var answerQ;
+    switch (difficulty) {
+      case "1":
+        difficulty = "easy";
+        remaining = "60s";
+        break;
+      case "2":
+        difficulty = "normal";
+        remaining = "45s";
+        break;
+      case "3":
+        difficulty = "advanced";
+        remaining = "30s";
+        break;
+      case "4":
+        difficulty = "extreme";
+        remaining = "20s";
+        break;
+      default:
+        break;
+    }
+    var contador = 1;
+    $.ajax({
+      type: "GET",
+      url: `http://localhost:3000/challenges/try?difficulty=${difficulty}`,
+    }).then((res) => {
+      res.questions.forEach((data) => {
+        $(`#q${contador.toString()}`).text(`${data.n1} * ${data.n2}`);
+        contador++;
+      });
+    });
+    $("#difficulty").text(difficulty);
+    $("#remaining").text(remaining);
+
+
+
+
+    // $('submit-1').click(() => {
+    //   answerQ = 'q1';
+    //   console.log(`form-${answerQ}`);
+    // })
+    // $(`form-q1`).submit((e) => {
+    //   var answerRequest = {answerRequest:{
+    //     id: answerQ,
+    //     n1: $(`#${answerQ}`).val()[0],
+    //     n2: $(`#${answerQ}`).val()[4],
+    //     result: $(`#result-${answerQ}`).val(),
+    //     dateTimeAnswer: new Date(),
+    //     dateTimeStart: getCookie("start_time"),
+    //     userEmail: getCookie("userEmail"),
+    //     difficulty: difficulty
+    //   }};
+
+    //   $.ajax({
+    //     type: "POST",
+    //     url: "http://localhost:3000/challenges/answer",
+    //     data: answerRequest,
+    //     dataType: "json",
+    //     encode: true,
+    //   })
+
+    //   event.preventDefault();
+    // });
+  });
+
+
+  function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+</script>
