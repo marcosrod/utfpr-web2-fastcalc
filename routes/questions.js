@@ -19,4 +19,8 @@ router.get('/random',auth,(req, res) =>{
     res.status(200).send(helper.getQuestions());
 })
 
+router.post('/answer',auth,(req, res) =>{
+    
+})
+
 module.exports = router;
