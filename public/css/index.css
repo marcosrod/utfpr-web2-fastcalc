@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+*, body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    height: 100%;
+    background-color: #ff606e;
+    overflow: hidden;
+}
+
+
+.form-holder {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+}
+
+.form-holder .form-content {
+    position: relative;
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 60px;
+}
+
+.form-content .form-items {
+    border: 3px solid rgb(0, 0, 0);
+    padding: 40px;
+    display: inline-block;
+    width: 100%;
+    min-width: 540px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: left;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.form-content h3 {
+    color: rgb(0, 0, 0);
+    text-align: left;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-content h3.form-title {
+    margin-bottom: 30px;
+}
+
+.form-content p {
+    color: rgb(0, 0, 0);
+    text-align: left;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+
+.form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
+    color: rgb(8, 0, 0);
+}
+
+.form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
+    width: 90%;
+    padding: 9px 20px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 6px;
+    background-color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: 300;
+    color: #000000;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+}
+
+
+.btn-primary{
+    background-color: #ffffff;
+    outline: none;
+    border: 0px;
+     box-shadow: none;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+    background-color: #cecaca;
+    outline: none !important;
+    border: none !important;
+     box-shadow: none;
+}
+
+.form-content textarea {
+    position: static !important;
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    font-size: 15px;
+    font-weight: 300;
+    color: #8D8D8D;
+    outline: none;
+    resize: none;
+    height: 120px;
+    -webkit-transition: none;
+    transition: none;
+    margin-bottom: 14px;
+}
+
+.form-content textarea:hover, .form-content textarea:focus {
+    border: 0;
+    background-color: #ebeff8;
+    color: #8D8D8D;
+}
+
+.mv-up{
+    margin-top: -9px !important;
+    margin-bottom: 8px !important;
+}
+
+.invalid-feedback{
+    color: #ff606e;
+}
+
+.valid-feedback{
+   color: #2acc80;
+}
+
+.index-title{
+    font-size: 70px;
+    font-weight: bolder;
+    color: #000000;
+}
+
+.index-subtitle{
+    font-size: 35px;
+    font-weight: bold;
+    color: #0f0f0f;
+}
+
+.index-title-div{
+    height: 100vh;
+    width: 100vh;
+    margin-left: 40%;
+    margin-top: 10%
+}
+
+.subtitle-plus-icon{
+    display:flex;
+    flex-direction: row;
+}
+
+.icon-lightning{
+    height:30px;
+    width:30px;
+    margin-top: 3%;
+    margin-left: 2%;
+}
+
+.btn-index{
+    margin-top: 20%;
+    margin-left: 10%;
+    height: 70px;
+    width: 150px;
+}
+
+.answer-card-difficulty{
+    width:10%;
+    text-align:center;
+    font-weight: bold;
+    background-color:rgb(255, 255, 255);
+    border-radius: 10px;
+    margin-left:45%;
+    margin-top:2%;
+}
+
+.answer-card-time{
+    width:10%;
+    text-align:center;
+    font-weight: bold;
+    background-color:rgb(255, 255, 255);
+    border-radius: 10px;
+    margin-left:45%;
+    margin-top:2%;
+    margin-bottom:2%;
+}
+
+.page-div{
+    overflow:scroll;
+    height:100%;
+    width:100%;
+}
+
+.answer-card{
+    width:20%;
+    text-align:center;
+    font-weight: bold;
+    background-color:rgb(255, 255, 255);
+    border-radius: 10px;
+    margin-top:5%;
+    margin-left:40%;
+}
+
+.line{
+    height:0.5%;
+}
+
+.challenges-card-title{
+    text-align: center;
+    border-radius:0;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.challenges-card-info{
+    display:flex;
+    justify-content:space-between;
+    flex-direction: row;
+}
+
+.challenge-card{
+    margin-top:2%;
+    margin-left:15%;
+    width:70%;
+}
+
+.doc-card{
+    width:98%;
+    height:80%;
+    border: 0;
+    margin-top:2%;
+    margin-left:1%;
+}
