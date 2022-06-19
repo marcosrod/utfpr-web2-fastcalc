@@ -40,7 +40,7 @@ async function checkAnswer(answerRequest) {
             difficulty: difficulty, time_start: dateTimeStart, bonus_time: null, q1: dateTimeAnswer, q2: null, q3: null, 
             q4: null, q5: null, q6: null, q7: null, q8: null, q9:null, q10:null})
             remainingTime = await calculateRemainingTime(answer.time_start, dateTimeStart, dateTimeAnswer, difficulty, userEmail);
-        console.log(answer)
+        (answer)
         return {remainingTime: remainingTime, result: true}
     } else {
         switch(id) {
@@ -85,7 +85,7 @@ async function checkAnswer(answerRequest) {
         let answer = await Answers.findOne({user_email: userEmail, open: true});
         remainingTime = await calculateRemainingTime(answer.time_start, dateTimeStart, dateTimeAnswer, difficulty, userEmail);
         let check = await checkCompleted(userEmail, answer.time_start, remainingTime, id, subScore);
-        console.log(check);
+        (check);
         return check && check.completed ? check : {remainingTime: remainingTime, result: true}
     }
 }
@@ -166,10 +166,10 @@ async function calculateRemainingTime(dateTimeStart, dateTimePastAnswer, dateTim
     let dateAnswer = new Date(dateTimeAnswer);
     let datePast = new Date(dateTimePastAnswer);
     let timeAnswer = (dateAnswer.getTime() - datePast.getTime()) / 1000;
-    console.log(timeAnswer);
+    (timeAnswer);
     remainingTime = await getRemainingTime(difficulty, timeAnswer, dateTimeStart, datePast, dateAnswer, userEmail);
     remainingTime = remainingTime.toFixed(0);
-    console.log(remainingTime);
+    (remainingTime);
     if (remainingTime < 0) {
         remainingTime = 0;
     }
@@ -188,7 +188,7 @@ async function getRemainingTime(difficulty, timeAnswer, dateTimeStart, datePast,
         case 1:
             if (answer) {
                 totalQuestionTime = answer.bonus_time;
-                console.log(totalQuestionTime);
+                (totalQuestionTime);
             } else {
                 totalQuestionTime = 60;
             }

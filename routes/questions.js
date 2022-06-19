@@ -6,13 +6,11 @@ const helper = require('../helper/questionHelper')
 router.get('/try',auth,(req, res) =>{
     let dateNow = new Date();
     dateNow = dateNow.toISOString();
-    console.log(dateNow);
     res.cookie('start_time', dateNow);
     res.status(200).send(helper.getQuestions(req.query.difficulty));
 })
 
 router.post('/answer',auth,(req, res) =>{
-    console.log(req.body);
     helper.checkAnswer(req.body.answerRequest).then(function(r) {
         res.status(200).send(r);
     });
