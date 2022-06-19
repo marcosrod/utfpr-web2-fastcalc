@@ -3,11 +3,11 @@
   <head>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/index">Home</a></li>
-        <li class="breadcrumb-item"><a href="/challenges">Challenges</a></li>
-        <li class="breadcrumb-item"><a href="/mypage">History</a></li>
-        <li class="breadcrumb-item"><a href="/help">Help</a></li>
-        <li class="breadcrumb-item"><a href="/users/logout">Logout</a></li>
+        <li class="breadcrumb-item"><a class="header-item" href="/index">Home</a></li>
+        <li class="breadcrumb-item"><a class="header-item" href="/challenges">Challenges</a></li>
+        <li class="breadcrumb-item"><a class="header-item" href="/mypage">History</a></li>
+        <li class="breadcrumb-item"><a class="header-item" href="/help">Help</a></li>
+        <li class="breadcrumb-item"><a class="header-item" href="/users/logout">Logout</a></li>
       </ol>
     </nav>
     <title>Challenges History Details</title>
@@ -18,49 +18,65 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/index.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
     <div class="page-div">
       <div class="card challenges-card-title">
-        <div class="card-body"><h1>History</h1>
-        <h4>Difficulty: Easy</h4></div>
-      </div>
-
-      <div class="card challenge-card">
         <div class="card-body">
-          <div class="challenges-card-info">
-            <h4>Points: 4</h4>
-            <h4>Remaining Time: 40 Seconds</h4>
-          </div>
+          <h1>History</h1>
+          <h4 id="title-difficulty"></h4>
         </div>
       </div>
 
-      <div class="card challenge-card">
-        <div class="card-body">
-          <div class="challenges-card-info">
-            <h4>Points: 10</h4>
-            <h4>Remaining Time: 30 Seconds</h4>
-          </div>
-        </div>
-      </div>
-
-      <div class="card challenge-card">
-        <div class="card-body">
-          <div class="challenges-card-info">
-            <h4>Points: 25</h4>
-            <h4>Remaining Time: 20 Seconds</h4>
-          </div>
-        </div>
-      </div>
-
-      <div class="card challenge-card">
-        <div class="card-body">
-          <div class="challenges-card-info">
-            <h4>Points: 5</h4>
-            <h4>Remaining Time: 5 Seconds</h4>
-          </div>
-        </div>
-      </div>
+      <div class="cards-wrapper"></div>
     </div>
   </body>
 </html>
+
+<script>
+  $(document).ready(function () {
+    var difficulty = location.href[location.href.length - 1];
+    difficulty = Number(difficulty);
+    
+    $.ajax({
+      type: "GET",
+      url: `http://localhost:3000/challenges/get-difficulty-name`,
+      data: {difficulty: difficulty},
+      dataType: "json",
+    }).then((res) => {
+      $('#title-difficulty').text(res.difficulty);
+    });
+    $.ajax({
+      type: "GET",
+      url: `http://localhost:3000/users/get-user-by-token`,
+    }).then((res) => {
+      $.ajax({
+        type: "GET",
+        url: `http://localhost:3000/challenges/history`,
+        data: { email: res, difficulty: difficulty },
+      }).then((res) => {
+        populateCards(res);
+      });
+    });
+  });
+
+  function populateCards(historyList) {
+    const cardList = document.querySelector(".cards-wrapper");
+    const card = document.querySelector(".card");
+    cardList.innerHTML = "";
+    historyList.forEach((card, i) => {
+      const scoreCard = `<div class="card challenge-card data-index=${i}">
+        <div class="card-body">
+          <div class="challenges-card-info">
+            <h4>Score: ${card.score}</h4>
+            <h4>Remaining Time: ${card.remainingTime} Seconds</h4>
+          </div>
+        </div>
+      </div>`;
+      const element = document.createElement("div");
+      element.innerHTML = scoreCard;
+      cardList.appendChild(element.firstChild);
+    });
+  }
+</script>

@@ -41,6 +41,21 @@ function getDifficulty(difficulty) {
     }
 }
 
+function getDifficultyNameById(difficulty) {
+    switch(difficulty) {
+        case '1':
+            return {difficulty: 'Easy'};
+        case '2':
+            return {difficulty: 'Normal'};
+        case '3':
+            return {difficulty: 'Advanced'};
+        case '4':
+            return {difficulty: 'Extreme'};
+        default:
+            return '';
+    }
+}
+
 async function getBestTime(email) {
     let bestTime = {};
     bestTime.easy = await Answers.exists({user_email: email, open: false, difficulty: 1, bonus_time: {$ne: null}}) ? ((await Answers.findOne({user_email: email, open: false, difficulty: 1, bonus_time: {$ne: null}})).bonus_time).toString() + 's' : '0s'
@@ -49,6 +64,18 @@ async function getBestTime(email) {
     bestTime.extreme = await Answers.exists({user_email: email, open: false, difficulty: 4, bonus_time: {$ne: null}}) ? ((await Answers.findOne({user_email: email, open: false, difficulty: 4, bonus_time: {$ne: null}})).bonus_time).toString() + 's' : '0s'
 
     return bestTime;
+}
+
+async function getHistory(email, difficulty) {
+    let questions = await Questions.find({user_email: email, difficulty: difficulty});
+    let history = []
+    if (questions) {
+        questions.forEach((questions) => {
+            history.push({score: questions.score, remainingTime: questions.remaining_time})
+        })
+    }
+
+    return history;
 }
 
 async function checkAnswer(answerRequest) {
@@ -260,4 +287,4 @@ async function checkForOpenAnswers(userEmail) {
 
 
 
-module.exports = {getQuestions, checkAnswer, getBestTime};
+module.exports = {getQuestions, checkAnswer, getBestTime, getHistory, getDifficultyNameById};

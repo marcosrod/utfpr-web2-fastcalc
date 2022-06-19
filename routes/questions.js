@@ -21,4 +21,15 @@ router.get('/best-time',auth,(req, res) =>{
     
 })
 
+router.get('/history',auth,(req, res) =>{
+    helper.getHistory(req.query.email, req.query.difficulty).then(function(r) {
+        res.status(200).send(r);
+    });
+    
+})
+
+router.get('/get-difficulty-name', auth,(req, res) =>{
+    res.status(200).send(helper.getDifficultyNameById(req.query.difficulty));
+})
+
 module.exports = router;
