@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router();
 const auth = require('../middlewares/auth')
-const helper = require('../helper/questionHelper')
 
 router.get('/',(req, res) =>{
     res.redirect('login');
@@ -11,8 +10,10 @@ router.get('/',(req, res) =>{
 router.get('/login',(req, res) =>{
     if(req.cookies.token != null) {
         res.redirect('/index')
+    } else {
+        res.render('login');
     }
-    res.render('login');
+    
 })
 
 router.get('/register',(req, res) =>{
