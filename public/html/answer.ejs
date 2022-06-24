@@ -39,6 +39,7 @@
 <script>
   var difficulty;
   var dateTimeStart;
+  var maxQuestions;
   $(document).ready(function () {
     difficulty = location.href[location.href.length - 1];
     dateTimeStart = new Date();
@@ -70,12 +71,21 @@
       type: "GET",
       url: `http://localhost:3000/challenges/try?difficulty=${difficulty}`,
     }).then((res) => {
-      populateCards(res.questions)
+      populateCards(res.questions);
+      maxQuestions = res.maxQuestions;
     });
     $("#difficulty").text(difficulty);
     $("#remaining").text(remaining);
   });
 
+  function checkLastQuestion(q) {
+    let qNumber = Number(q[1]);
+    if (qNumber === maxQuestions) {
+      return true;
+    }
+    return false;
+  }
+ 
   function saveAnswer(q) {
     $.ajax({
       type: "GET",
@@ -94,6 +104,8 @@
             difficulty: difficulty,
             dateTimeStart: dateTimeStart,
             dateTimeAnswer: dateTimeAnswer,
+            lastQuestion: checkLastQuestion(q),
+            maxQuestions: maxQuestions,
           },
         };
 

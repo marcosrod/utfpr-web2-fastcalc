@@ -4,12 +4,13 @@ var questions = [];
 
 function getQuestions(difficulty) {
     let i = 0;
+    let max = getQuestionsNumberByDifficulty(difficulty);
     questions = [];
-    for(i = 0; i < 10; i++) {
+    for(i = 0; i < max; i++) {
         questions.push(getRandomQuestions());
     }
 
-    return {questions: questions, difficulty: difficulty};
+    return {questions: questions, difficulty: difficulty, maxQuestions: max};
 }
 
 function getRandomQuestions() {
@@ -25,6 +26,21 @@ function getRandomQuestions() {
     }
 
     return random;
+}
+
+function getQuestionsNumberByDifficulty(difficulty) {
+    switch(difficulty) {
+        case 'easy':
+            return Math.floor(Math.random() * (6 - 3 + 1) + 3);
+        case 'normal':
+            return Math.floor(Math.random() * (7 - 4 + 1) + 4);
+        case 'advanced':
+            return Math.floor(Math.random() * (8 - 5 + 1) + 5);
+        case 'extreme':
+            return Math.floor(Math.random() * (10 - 6 + 1) + 6);
+        default:
+            break;
+    }
 }
 
 function getDifficulty(difficulty) {
@@ -80,7 +96,7 @@ async function getHistory(email, difficulty) {
 }
 
 async function checkAnswer(answerRequest) {
-    const {id, n1, n2, result, dateTimeAnswer, dateTimeStart, userEmail, difficulty} = answerRequest;
+    const {id, n1, n2, result, dateTimeAnswer, dateTimeStart, userEmail, difficulty, lastQuestion, maxQuestions} = answerRequest;
     var remainingTime;
     var subScore;
     let difficultyNumber = getDifficulty(difficulty);
@@ -138,31 +154,38 @@ async function checkAnswer(answerRequest) {
         }
         let answer = await Answers.findOne({user_email: userEmail, open: true});
         remainingTime = await calculateRemainingTime(answer.time_start, dateTimeStart, dateTimeAnswer, difficultyNumber, userEmail);
-        let check = await checkCompleted(userEmail, answer.time_start, remainingTime, id, subScore);
-        (check);
+        let check = await checkCompleted(userEmail, answer.time_start, remainingTime, id, subScore, lastQuestion, maxQuestions);
         return check && check.completed ? check : {remainingTime: remainingTime, result: true}
     }
 }
 
-async function checkCompleted(userEmail, dateTimeStart, remainingTime, id, subScore) {
-    let answer = await Answers.findOne({user_email: userEmail, open: true, 
-        q1: {$ne : null}, q2: {$ne : null}, q3: {$ne : null}, q4: {$ne : null}, q5: {$ne : null}, 
-        q6: {$ne : null}, q7: {$ne : null}, q8: {$ne : null}, q9: {$ne : null}, q10: {$ne : null}})
+async function checkCompleted(userEmail, dateTimeStart, remainingTime, id, subScore, lastQuestion, maxQuestions) {
+    let answer = await Answers.findOne({user_email: userEmail, open: true})
     let score;
-    if(answer) {
+    if(lastQuestion === 'true' && (await checkAllQuestionsSolved(userEmail, maxQuestions))) {
         score = calculateUserScore(answer, dateTimeStart, id);
 
         return await saveQuestionResult(userEmail, answer.difficulty, score, remainingTime);
-    } else if(remainingTime == 0) {
-        let answer = await Answers.findOne({user_email: userEmail, open: true});
+    } else if(remainingTime === 0) {
         score = calculateUserSubScore(answer, subScore);
 
         return await saveQuestionResult(userEmail, answer.difficulty, score, remainingTime);
     }
-
-    return false;
-    
+    return false; 
 }
+
+async function checkAllQuestionsSolved(userEmail, maxQuestions) {
+    let i = 1;
+    let contador = 0;
+    for(i = 1; i <= maxQuestions; i++) {
+        let question = `q${i}`;
+        let answer = await Answers.exists({user_email: userEmail, open: true, [question]: {$ne: null} })
+        if(!answer) {
+            contador++;
+        }
+    }
+    return !(contador > 0);
+} 
 
 async function saveQuestionResult(userEmail, difficulty, score, remainingTime) {
     let question = await Questions.create({user_email: userEmail, difficulty: difficulty, 
@@ -220,14 +243,12 @@ async function calculateRemainingTime(dateTimeStart, dateTimePastAnswer, dateTim
     let dateAnswer = new Date(dateTimeAnswer);
     let datePast = new Date(dateTimePastAnswer);
     let timeAnswer = (dateAnswer.getTime() - datePast.getTime()) / 1000;
-    console.log(difficulty, timeAnswer, dateTimeStart, datePast, dateAnswer, userEmail);
     remainingTime = await getRemainingTime(difficulty, timeAnswer, dateTimeStart, datePast, dateAnswer, userEmail);
     remainingTime = remainingTime.toFixed(0);
     (remainingTime);
     if (remainingTime < 0) {
         remainingTime = 0;
     }
-    console.log(remainingTime);
     await Answers.updateOne({user_email: userEmail, open: true}, {bonus_time: remainingTime})
 
     return remainingTime;
