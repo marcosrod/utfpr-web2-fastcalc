@@ -4,6 +4,7 @@ var questions = [];
 
 function getQuestions(difficulty) {
     let i = 0;
+    questions = [];
     for(i = 0; i < 10; i++) {
         questions.push(getRandomQuestions());
     }
