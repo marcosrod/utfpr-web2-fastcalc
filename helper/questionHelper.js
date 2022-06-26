@@ -3,6 +3,7 @@ const Questions = require('../model/question');
 var questions = [];
 
 function getQuestions(difficulty) {
+    questions = [];
     let i = 0;
     for(i = 0; i < 10; i++) {
         questions.push(getRandomQuestions());
