@@ -375,6 +375,31 @@
     dateTimeStart = dateTimeStart.toISOString();
     let remaining;
     var answerQ;
+    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+      $.ajax({
+      type: "GET",
+      url: `http://localhost:3000/users/get-user-by-token`,
+    }).then((res) => {
+      var save = {
+            userEmail: res,
+            difficulty: difficulty,
+            score: 20,
+            remainingTime: 0,
+            reloaded: true
+        };
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:3000/challenges/save-reloaded",
+          data: save,
+          dataType: "json",
+          encode: true,
+        }).then((res) => {
+          if (res.completed) {
+            window.location.href = "http://localhost:3000/mypage";
+          }
+        });
+    });
+    }
     switch (difficulty) {
       case "1":
         difficulty = "easy";

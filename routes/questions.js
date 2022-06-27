@@ -32,4 +32,8 @@ router.get('/get-difficulty-name', auth,(req, res) =>{
     res.status(200).send(helper.getDifficultyNameById(req.query.difficulty));
 })
 
+router.post('/save-reloaded', auth,(req, res) =>{
+    res.status(200).send(helper.saveQuestionResult(req.body.userEmail, req.body.difficulty, req.body.score, req.body.remainingTime, req.body.reloaded));
+})
+
 module.exports = router;
